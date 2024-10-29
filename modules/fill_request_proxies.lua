@@ -12,6 +12,7 @@ local function fill_request_proxy(player, proxy)
   for _, plan in ipairs(removal_plan) do
     if plan and plan.items then
       for _, from in ipairs(plan.items.in_inventory) do
+        if from.count == nil then from.count = 1 end
         if from.count > 0 then
           local stack = { name = plan.id.name, quality = plan.id.quality or "normal", count = from.count }
           local sourceInv = { proxy.proxy_target.get_inventory(from.inventory)[from.stack + 1] }
@@ -25,6 +26,7 @@ local function fill_request_proxy(player, proxy)
   for _, plan in ipairs(insert_plan) do
     if plan and plan.items then
       for _, to in ipairs(plan.items.in_inventory) do
+        if to.count == nil then to.count = 1 end
         if to.count > 0 then
           local stack = { name = plan.id.name, quality = plan.id.quality or "normal", count = to.count }
           local targetInv = { proxy.proxy_target.get_inventory(to.inventory)[to.stack + 1] }
@@ -38,6 +40,7 @@ local function fill_request_proxy(player, proxy)
   for _, plan in ipairs(removal_plan) do
     if plan and plan.items then
       for _, from in ipairs(plan.items.in_inventory) do
+        if from.count == nil then from.count = 1 end
         if from.count > 0 then
           local stack = { name = plan.id.name, quality = plan.id.quality or "normal", count = from.count }
           local sourceInv = { proxy.proxy_target.get_inventory(from.inventory)[from.stack + 1] }
